@@ -1,0 +1,7 @@
+.{
+    .{ 
+        .name = "exe",
+        .kind = .exe,
+        .imports = .{ .{ .name = "generated" } }, 
+    },
+}

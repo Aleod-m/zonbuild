@@ -1,0 +1,27 @@
+.{
+    .name = .simple,
+    .version = "0.0.0",
+    .fingerprint = 0xc17b3d029d8244de, // Changing this has security and trust implications.
+    // Tracks the earliest Zig version that the package considers to be a
+    // supported use case.
+    .minimum_zig_version = "0.15.2",
+    // This field is optional.
+    // Each dependency must either provide a `url` and `hash`, or a `path`.
+    // `zig build --fetch` can be used to fetch all dependencies of a package, recursively.
+    // Once all dependencies are fetched, `zig build` no longer requires
+    // internet connectivity.
+    .dependencies = .{
+        .zonbuild = .{
+            .url = "../../.",
+            .hash = "zonbuild-0.0.0-J1SR-BQqAACDGJBjsVD8IBCuxeUii4oWLqc68l5qcf8M",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        // For example...
+        //"LICENSE",
+        //"README.md",
+    },
+}

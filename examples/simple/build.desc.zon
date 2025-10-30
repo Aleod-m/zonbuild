@@ -1,0 +1,11 @@
+.{
+    .{
+        .name = "lib",
+        .kind = .mod,
+    },
+    .{
+        .name = "exe",
+        .kind = .exe,
+        .imports = .{ .{ .name = "lib", .as = "simple" } }
+    }
+}

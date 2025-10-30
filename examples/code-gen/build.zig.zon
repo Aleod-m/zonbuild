@@ -1,0 +1,22 @@
+.{
+    .name = .code_gen,
+    .version = "0.0.0",
+    .fingerprint = 0xe879e0a076307ab2,
+    .minimum_zig_version = "0.15.2",
+    .dependencies = .{
+        .zonbuild = .{
+            .url = "../../.",
+            .hash = "zonbuild-0.0.0-J1SR-BQqAACDGJBjsVD8IBCuxeUii4oWLqc68l5qcf8M",
+        },
+        .gen = .{
+            .url = "./gen",
+            .hash = "gen-0.0.0-XFTcogcHAADb9cx8-HHkIquGacL7O7tR28is5DH51Pft",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.desc.zon",
+        "build.zig.zon",
+        "src",
+    },
+}
