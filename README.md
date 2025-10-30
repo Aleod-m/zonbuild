@@ -17,7 +17,7 @@ Install:
 zig fetch --save git+https://github.com/Aleod-m/zonbuild.git
 ```
 
-```zon
+```zig
 // build.desc.zon
 .{
     .{
@@ -95,3 +95,5 @@ fn build(b: *Build) void {
     }
 }
 ```
+
+
