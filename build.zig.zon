@@ -1,0 +1,13 @@
+.{
+    .name = .zonbuild,
+    .version = "0.0.0",
+    .minimum_zig_version = "0.14.0",
+    .fingerprint = 0x6c3005d1f8915427,
+    .dependencies = .{},
+    .paths = .{
+        "src",
+        "build.zig",
+        "build.zig.zon",
+        "Readme.md",
+    },
+}
