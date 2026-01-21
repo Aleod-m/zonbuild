@@ -21,7 +21,7 @@ pub const BuildDesc = []const CompileDesc;
 ///
 /// This allows you to inject modules before the execution of the build description. 
 /// The principal use case for this function is code generation.
-pub fn runDescWithContext(ctx: *Context, build_desc: BuildDesc) void {
+pub fn runBuildDescWithContext(ctx: *Context, build_desc: BuildDesc) void {
     // Define all modules.
     for (build_desc) |desc| {
         const module = ctx.b.createModule(.{
@@ -107,6 +107,6 @@ pub fn runDescWithContext(ctx: *Context, build_desc: BuildDesc) void {
 /// Initialize the context and evaluates the build description.
 pub fn runBuildDesc(b: *Build, build_desc: BuildDesc) Context {
     var ctx: Context = .init(b);
-    runDescWithContext(&ctx, build_desc);
+    runBuildDescWithContext(&ctx, build_desc);
     return ctx;
 }

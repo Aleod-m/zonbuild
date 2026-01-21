@@ -1,11 +1,11 @@
 const std = @import("std");
 const Build = std.Build;
-const lib = @import("./src/root.zig");
+const lib = @import("src/root.zig");
 // Reexports
 pub const Context = lib.Context;
 pub const CompileDesc = lib.CompileDesc;
 pub const BuildDesc = lib.BuildDesc;
-pub const runDescWithContext = lib.runDescWithContext;
+pub const runBuildDescWithContext = lib.runBuildDescWithContext;
 pub const runBuildDesc = lib.runBuildDesc;
 
 pub fn build(b: *Build) void {
