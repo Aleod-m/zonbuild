@@ -41,12 +41,14 @@ pub fn runBuildDescWithContext(ctx: *Context, build_desc: BuildDesc) void {
             var import_name: []const u8 = undefined;
             if (std.mem.indexOfScalar(u8, import.name, '/')) |idx| {
                 const dep = ctx.b.dependency(import.name[0..idx], .{});
-                std.debug.print("Package name: {s}", .{import.name[0..idx]});
-                std.debug.print("Package module: {s}", .{import.name[(idx + 1)..]});
                 import_module = dep.module(import.name[(idx + 1)..]);
-                import_name = import.as orelse import.name[(idx + 1)..];
+                import_name = import.as orelse translate_import: {
+                    const out_name = ctx.b.dupe(import.name);
+                    std.mem.replace(u8, import.name, "/", ".", out_name);
+                    break :translate_import out_name;
+                };
             } else {
-                import_module = ctx.modules.get(import.name) orelse @panic("Import module not found");
+                import_module = ctx.modules.get(import.name) orelse @panic("ZonBuild: Import module not found `" ++ import.name ++ "` for module `" ++ desc.name ++ "`.");
                 import_name = import.as orelse import.name;
             }
             module.addImport(import_name, import_module);
@@ -86,7 +88,7 @@ pub fn runBuildDescWithContext(ctx: *Context, build_desc: BuildDesc) void {
                 .run => {
                     const compile_step = desc.getCompile(ctx);
                     if (ctx.exe_step != null)
-                        @panic("Multiple executable please select a target executable with -Dname=<target>");
+                        @panic("ZonBuild: Multiple executables found please select a target executable to run with -Dname=<exe_name>");
                     ctx.exe_step = ctx.b.addRunArtifact(compile_step);
                     ctx.run_step.dependOn(&ctx.exe_step.?.step);
                 },
