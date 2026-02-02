@@ -65,6 +65,7 @@ pub const Step = enum {
 /// Module import description.
 pub const Import = struct {
     /// Name of the module import.
+    /// If the import is a dependency the format is dep_name/module and is translated as dep_name.module
     name: []const u8,
     /// Rename the module for the use inside the module.
     as: ?[]const u8 = null,
