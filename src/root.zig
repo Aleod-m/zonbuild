@@ -14,12 +14,12 @@ const std = @import("std");
 const Build = std.Build;
 
 pub const CompileDesc = @import("CompileDesc.zig");
-pub const Context= @import("Context.zig");
+pub const Context = @import("Context.zig");
 pub const BuildDesc = []const CompileDesc;
 
-/// Evaluates the context with a pre-initialized context. 
+/// Evaluates the context with a pre-initialized context.
 ///
-/// This allows you to inject modules before the execution of the build description. 
+/// This allows you to inject modules before the execution of the build description.
 /// The principal use case for this function is code generation.
 pub fn runBuildDescWithContext(ctx: *Context, build_desc: BuildDesc) void {
     // Define all modules.
@@ -48,7 +48,14 @@ pub fn runBuildDescWithContext(ctx: *Context, build_desc: BuildDesc) void {
                     break :translate_import out_name;
                 };
             } else {
-                import_module = ctx.modules.get(import.name) orelse @panic("ZonBuild: Import module not found `" ++ import.name ++ "` for module `" ++ desc.name ++ "`.");
+                import_module = ctx.modules.get(import.name) orelse {
+                    var buf: [2048]u8 = undefined;
+                    @panic(std.fmt.bufPrint(
+                        &buf,
+                        "ZonBuild: Import module not found `{s}` for module `{s}`.",
+                        .{ import.name, desc.name },
+                    ) catch @panic("Error message too long."));
+                };
                 import_name = import.as orelse import.name;
             }
             module.addImport(import_name, import_module);
@@ -65,7 +72,7 @@ pub fn runBuildDescWithContext(ctx: *Context, build_desc: BuildDesc) void {
         }
 
         // Add the steps to the correct steps.
-        
+
         // If target module is defined and is not this one don't add module to steps.
         if (ctx.target_module_name) |target_module_name|
             if (!std.mem.eql(u8, target_module_name, desc.name))
@@ -97,10 +104,10 @@ pub fn runBuildDescWithContext(ctx: *Context, build_desc: BuildDesc) void {
                     const install_step = ctx.b.addInstallDirectory(.{
                         .source_dir = compile_doc.getEmittedDocs(),
                         .install_dir = .prefix,
-                        .install_subdir = ctx.b.pathJoin(&.{"docs/", desc.name}),
+                        .install_subdir = ctx.b.pathJoin(&.{ "docs/", desc.name }),
                     });
                     ctx.doc_step.dependOn(&install_step.step);
-                }
+                },
             }
         }
     }
