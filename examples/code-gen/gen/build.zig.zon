@@ -6,7 +6,7 @@
     .dependencies = .{
         .zonbuild = .{
             .url = "../..",
-            .hash = "zonbuild-0.0.0-J1SR-LArAAAU2nevhySVI7gwYN2COh1RUf_PCbLkr353",
+            .hash = "zonbuild-0.0.1-J1SR-LQrAAD93k-z6kgH_c4zuU2G-wK83npIjej3JpAq",
         },
     },
     .paths = .{
