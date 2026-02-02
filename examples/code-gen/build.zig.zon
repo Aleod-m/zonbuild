@@ -5,8 +5,8 @@
     .minimum_zig_version = "0.15.2",
     .dependencies = .{
         .zonbuild = .{
-            .url = "../../.",
-            .hash = "zonbuild-0.0.0-J1SR-BQqAACDGJBjsVD8IBCuxeUii4oWLqc68l5qcf8M",
+            .url = "../..",
+            .hash = "zonbuild-0.0.0-J1SR-LArAAAU2nevhySVI7gwYN2COh1RUf_PCbLkr353",
         },
         .gen = .{
             .url = "./gen",

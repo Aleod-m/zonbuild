@@ -44,7 +44,7 @@ pub fn runBuildDescWithContext(ctx: *Context, build_desc: BuildDesc) void {
                 import_module = dep.module(import.name[(idx + 1)..]);
                 import_name = import.as orelse translate_import: {
                     const out_name = ctx.b.dupe(import.name);
-                    std.mem.replace(u8, import.name, "/", ".", out_name);
+                    _ = std.mem.replace(u8, import.name, "/", ".", out_name);
                     break :translate_import out_name;
                 };
             } else {
